@@ -49,145 +49,6 @@ function pieChart(state, year) {
 });
 };
 
-function barChart(state){
-  var url = `/GDP/${state}`;
-  console.log(url);
-  var barDict = [];
-  var barValue = [];
-  var barLabels = ["1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
-  d3.select("svg").remove();
-  d3.json(url).then(function(barData){
-      Object.entries(barData[0]).forEach(([key, value]) => {
-        if (key === `Description`){
-          return true;
-        }
-        else if (key === `GeoName`){
-          return true;
-        }
-        else if (key === `IndustryId`){
-          return true;
-        }
-        else if (key === `Region`){
-          return true;
-        }
-        else {
-          barValue.push(value);
-          barDict.push({
-            year: key,
-            GDP: value
-          });
-        }
-        });
-      console.log(barValue);
-      console.log(barDict)
-
-// New Code for bar - Vijay
-
-      var margin = {top: 20, right: 20, bottom: 70, left: 75},
-          width = 600 - margin.left - margin.right,
-          height = 300 - margin.top - margin.bottom;
-
-      //var c10 = d3.scale.category30();
-
-      var myColor = d3.scaleLinear().domain([10,130]).range(["yellow", "steelblue"]);
-      
-      // set the ranges
-      //var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-      
-      var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-      var y = d3.scaleLinear().range([height, 0]);
-
-      // define the axis
-     
-      var xAxis = d3.axisBottom(x);
-
-      var yAxis = d3.axisLeft(y).ticks(10);
-
-
-      // add the SVG element
-      var svg = d3.select("body").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform", 
-                "translate(" + margin.left + "," + margin.top + ")");
-
-
-      // load the data
-      barDict.forEach(function(d) {
-            d.year = d.year;
-            d.GDP = +d.GDP;
-        });
-        
-        // scale the range of the data
-      x.domain(barDict.map(function(d) { return d.year; }));
-      y.domain([0, d3.max(barDict, function(d) { return d.GDP; })]);
-
-        // add axis
-      svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
-        .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", "-.55em")
-          .attr("transform", "rotate(-90)" );
-
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 5)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("GDP");
-
-
-        // Add bar chart
-      svg.selectAll(".barchart")
-         .data(barDict)
-         .enter()
-         .append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.year); })
-          .attr("width", x.bandwidth())
-          .attr("y", function(d) { return y(d.GDP); })
-          .attr("height", function(d) { return height - y(d.GDP);})
-          .attr("fill", function(d){return myColor((d.GDP/10000));});
-
-
-    // End of New code for bar - Vijay
-
-
-
-    });
-  };
-
-
-
-      //console.log(barDict[])
-
-      
-        //console.log((barData[0][key])); => 
-        // if ((barData[0][key] == "Description") ||
-        //     (barData[0][key] == "GeoName") ||
-        //     (barData[0][key] == "IndustryId")  ||
-        //     (barData[0][key] == "Region")){
-        //       console.log("Inside If loop");
-        //       console.log(barData[0][key]);
-        //     }
-        // else{
-        //   console.log("Inside else");
-        //   console.log(barData[0][key]);
-        //   barDict[key] = barData[0][key];
-        // }
-
-      //barDict.update(barData[0]);
-      //console.log(barDict);
-    //};
-
 function lineChart(state, industryId) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
@@ -313,7 +174,6 @@ function init() {
     
     pieChart(firstState,firstYear);
     lineChart(firstState, firstIndustry);
-    barChart(firstState);
   });
  });
 });
@@ -327,7 +187,6 @@ function optionChanged(changeState, changeYear) {
 
   pieChart(newState, newYear);
   lineChart(newState, newIndustry);
-  barChart(newState);
 };
 
 

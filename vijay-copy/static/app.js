@@ -83,15 +83,18 @@ function barChart(state){
 
 // New Code for bar - Vijay
 
-      var margin = {top: 20, right: 20, bottom: 70, left: 40},
+      var margin = {top: 20, right: 20, bottom: 70, left: 75},
           width = 600 - margin.left - margin.right,
           height = 300 - margin.top - margin.bottom;
 
+      //var c10 = d3.scale.category30();
 
+      var myColor = d3.scaleLinear().domain([10,130]).range(["yellow", "steelblue"]);
+      
       // set the ranges
       //var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
       
-      var x = d3.scaleBand().rangeRound([0, width], .05);
+      var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
       var y = d3.scaleLinear().range([height, 0]);
 
       // define the axis
@@ -151,7 +154,8 @@ function barChart(state){
           .attr("x", function(d) { return x(d.year); })
           .attr("width", x.bandwidth())
           .attr("y", function(d) { return y(d.GDP); })
-          .attr("height", function(d) { return height - y(d.GDP); });
+          .attr("height", function(d) { return height - y(d.GDP);})
+          .attr("fill", function(d){return myColor((d.GDP/10000));});
 
 
     // End of New code for bar - Vijay
