@@ -155,7 +155,13 @@ function barChart(state){
           .attr("width", x.bandwidth())
           .attr("y", function(d) { return y(d.GDP); })
           .attr("height", function(d) { return height - y(d.GDP);})
-          .attr("fill", function(d){return myColor((d.GDP/10000));});
+          .attr("fill", function(d){return myColor((d.GDP/10000));})
+          .on("click",function(d) {
+            var barState = d3.select("#selDataset").node().value;
+            d3.select("#selDataset2").node().value = d.year;
+            pieChart(barState,d.year)
+          });
+          
 
 
     // End of New code for bar - Vijay
