@@ -194,6 +194,100 @@ function barChart(state){
       //console.log(barDict);
     //};
 
+    function usmap() {
+      //Width and height of map
+      var width = 960;
+      var height = 500;
+  
+    // D3 Projection
+      // var projection = d3.geoMercator()
+      //           .translate([width/2, height/2])    // translate to center of screen
+      //           .scale([1000]);          // scale things down so see entire US
+    var projection = d3.geoAlbersUsa();
+
+    // Define path generator
+      var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
+              .projection(projection);  // tell path generator to use albersUsa projection
+  
+        
+    // Define linear scale for output
+      var color = d3.scaleLinear()
+              .range(["rgb(213,222,217)","rgb(69,173,168)","rgb(84,36,55)","rgb(217,91,67)"]);
+  
+      var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
+  
+    //Create SVG element and append map to the SVG
+      var svg = d3.select("#usmap")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+            
+    // Append Div for tooltip to SVG
+      var div = d3.select("#usmap")
+              .append("div")   
+              .attr("class", "tooltip")               
+              .style("opacity", 0);
+  
+  
+    // Load GeoJSON data and merge with states data
+    console.log("before d3.json usmap");
+  
+    
+    //d3.json("/usMap"), function(jsonData) {
+      //console.log
+    // Bind the data to the SVG and create one path per GeoJSON feature
+//    d3.select("#usmap").append("svg");
+
+    d3.json("/usMap").then((jsonData) => {
+      console.log("inside usmap");
+      console.log(jsonData);
+      svg.selectAll("path")
+        .data(jsonData.features)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .style("stroke", "#000")
+        .style("stroke-width", "1")
+        .style("fill","steelblue");
+        //.style("fill", function(d) {
+  
+        // // Get data value
+        // var value = d.properties.visited;
+  
+        // if (value) {
+        // //If value exists…
+        // return color(value);
+        // } else {
+        // //If value is undefined…
+        //return "rgb(213,222,217)";
+        //});
+    
+            
+      // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
+      var legend = d3.select("#usmap").append("svg")
+                  .attr("class", "legend")
+                .attr("width", 140)
+                .attr("height", 200)
+                .selectAll("g")
+                .data(color.domain().slice().reverse())
+                .enter()
+                .append("g")
+                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+  
+          legend.append("rect")
+              .attr("width", 18)
+              .attr("height", 18)
+              .style("fill", color);
+  
+          legend.append("text")
+              .data(legendText)
+                .attr("x", 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .text(function(d) { return d; });
+        });
+  };
+
 function lineChart(state, industryId) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
@@ -282,6 +376,7 @@ function lineChart(state, industryId) {
 });
 };
 
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
@@ -320,6 +415,7 @@ function init() {
     pieChart(firstState,firstYear);
     lineChart(firstState, firstIndustry);
     barChart(firstState);
+    usmap();
   });
  });
 });

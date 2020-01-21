@@ -10,6 +10,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import Session
 #from orderedset import OrderedSet
 from sqlalchemy import Column, Integer, String, Float
+import json
 
 # Flask Setup
 app = Flask(__name__)
@@ -184,6 +185,12 @@ def industry(year):
         "description": sample_data.Description.tolist(),
     }
     return jsonify(data)
+
+@app.route("/usMap")
+def usMap():
+
+    cursor = json.load(open("static/us-states.json","r"))
+    return cursor
 
 if __name__ == "__main__":
     app.run(debug=True)
