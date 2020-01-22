@@ -55,7 +55,8 @@ function barChart(state){
   var barDict = [];
   var barValue = [];
   var barLabels = ["1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
-  d3.select("svg").remove();
+  //d3.select("svg").remove();
+  d3.selectAll('#barchart svg').remove();
   d3.json(url).then(function(barData){
       Object.entries(barData[0]).forEach(([key, value]) => {
         if (key === `Description`){
@@ -105,7 +106,8 @@ function barChart(state){
 
 
       // add the SVG element
-      var svg = d3.select("body").append("svg")
+      //var svg = d3.select("#barchart").remove("svg");
+      svgBar = d3.select("#barchart").append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -124,7 +126,7 @@ function barChart(state){
       y.domain([0, d3.max(barDict, function(d) { return d.GDP; })]);
 
         // add axis
-      svg.append("g")
+      svgBar.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis)
@@ -134,7 +136,7 @@ function barChart(state){
           .attr("dy", "-.55em")
           .attr("transform", "rotate(-90)" );
 
-      svg.append("g")
+      svgBar.append("g")
           .attr("class", "y axis")
           .call(yAxis)
         .append("text")
@@ -146,11 +148,12 @@ function barChart(state){
 
 
         // Add bar chart
-      svg.selectAll(".barchart")
+      svgBar.selectAll(".barchart")
          .data(barDict)
          .enter()
          .append("rect")
           .attr("class", "bar")
+          .attr("id","the_bar_SVG")
           .attr("x", function(d) { return x(d.year); })
           .attr("width", x.bandwidth())
           .attr("y", function(d) { return y(d.GDP); })
@@ -193,100 +196,6 @@ function barChart(state){
       //barDict.update(barData[0]);
       //console.log(barDict);
     //};
-
-    function usmap() {
-      //Width and height of map
-      var width = 960;
-      var height = 500;
-  
-    // D3 Projection
-      // var projection = d3.geoMercator()
-      //           .translate([width/2, height/2])    // translate to center of screen
-      //           .scale([1000]);          // scale things down so see entire US
-    var projection = d3.geoAlbersUsa();
-
-    // Define path generator
-      var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
-              .projection(projection);  // tell path generator to use albersUsa projection
-  
-        
-    // Define linear scale for output
-      var color = d3.scaleLinear()
-              .range(["rgb(213,222,217)","rgb(69,173,168)","rgb(84,36,55)","rgb(217,91,67)"]);
-  
-      var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
-  
-    //Create SVG element and append map to the SVG
-      var svg = d3.select("#usmap")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
-            
-    // Append Div for tooltip to SVG
-      var div = d3.select("#usmap")
-              .append("div")   
-              .attr("class", "tooltip")               
-              .style("opacity", 0);
-  
-  
-    // Load GeoJSON data and merge with states data
-    console.log("before d3.json usmap");
-  
-    
-    //d3.json("/usMap"), function(jsonData) {
-      //console.log
-    // Bind the data to the SVG and create one path per GeoJSON feature
-//    d3.select("#usmap").append("svg");
-
-    d3.json("/usMap").then((jsonData) => {
-      console.log("inside usmap");
-      console.log(jsonData);
-      svg.selectAll("path")
-        .data(jsonData.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .style("stroke", "#000")
-        .style("stroke-width", "1")
-        .style("fill","steelblue");
-        //.style("fill", function(d) {
-  
-        // // Get data value
-        // var value = d.properties.visited;
-  
-        // if (value) {
-        // //If value exists…
-        // return color(value);
-        // } else {
-        // //If value is undefined…
-        //return "rgb(213,222,217)";
-        //});
-    
-            
-      // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-      var legend = d3.select("#usmap").append("svg")
-                  .attr("class", "legend")
-                .attr("width", 140)
-                .attr("height", 200)
-                .selectAll("g")
-                .data(color.domain().slice().reverse())
-                .enter()
-                .append("g")
-                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-  
-          legend.append("rect")
-              .attr("width", 18)
-              .attr("height", 18)
-              .style("fill", color);
-  
-          legend.append("text")
-              .data(legendText)
-                .attr("x", 24)
-                .attr("y", 9)
-                .attr("dy", ".35em")
-                .text(function(d) { return d; });
-        });
-  };
 
 function lineChart(state, industryId) {
 
@@ -377,6 +286,7 @@ function lineChart(state, industryId) {
 };
 
 
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
@@ -415,7 +325,7 @@ function init() {
     pieChart(firstState,firstYear);
     lineChart(firstState, firstIndustry);
     barChart(firstState);
-    usmap();
+
   });
  });
 });
@@ -429,6 +339,9 @@ function optionChanged(changeState, changeYear) {
 
   pieChart(newState, newYear);
   lineChart(newState, newIndustry);
+  //d3.select("#barchart").remove("svg")
+  //d3.select("#the_bar_SVG").remove();
+  //d3.selectAll('#barchart svg').remove();
   barChart(newState);
 };
 
