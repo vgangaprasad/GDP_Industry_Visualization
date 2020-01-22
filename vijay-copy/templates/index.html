@@ -179,7 +179,8 @@
             ];
         
         var uStates={};
-          
+        var mapColor = d3.scaleLinear().domain([10,130]).range(["yellow", "steelblue"]);
+
         uStates.draw = function(id, data, toolTip){		
           function mouseOver(d){
             d3.select("#tooltip").transition().duration(200).style("opacity", .9);      
@@ -196,6 +197,7 @@
           d3.select(id).selectAll(".state")
             .data(uStatePaths).enter().append("path").attr("class","state").attr("d",function(d){ return d.d;})
             .style("fill",function(d){ return data[d.id].color; })
+            //.attr("fill", function(d){return myColor((d.GDP/10000));})
             .on("mouseover", mouseOver).on("mouseout", mouseOut).on("click", function(d) {
       
               const mapState = d3.select("h4").text();
