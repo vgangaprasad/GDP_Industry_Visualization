@@ -16,6 +16,15 @@
     .state:hover{
       fill-opacity:0.5;
     }
+    .jumbotron{
+      background-color: lightyellow;
+      color: #800026;
+    }
+
+    .well{
+      background-color: lightyellow;
+    }
+
     #tooltip {   
       position: absolute;           
       text-align: center;
@@ -63,7 +72,7 @@
 
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h1>GDP and Industry Visualization</h1>
+        <h1><strong>GDP and Industry Visualization</strong></h1>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
@@ -72,22 +81,25 @@
 
       <div class="col-md-4">
         <div class="well">
-          <h5>SELECT State:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          <h5><strong> State: </strong>
+            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          </h5>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="well">
-          <h5>SELECT Year:</h5>
-          <select id="selDataset2" onchange="optionChanged(this.value)"></select>
+          <h5><strong>Select Year:</strong>
+            <select id="selDataset2" onchange="optionChanged(this.value)"></select>
+          </h5> 
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="well">
-          <h5>SELECT Industry:</h5>
-          <select id="selDataset3" onchange="optionChanged(this.value)"></select>
+          <h5></h5><strong>Select Industry:</strong>
+            <select id="selDataset3" onchange="optionChanged(this.value)"></select>
+          </h5>
         </div>
       </div>
 
@@ -107,7 +119,7 @@
 
   <div class="row">
     <div class="col-md-12">  
-      <canvas id ="usNewMap"></canvas>
+      <canvas id ="usNewMap" ></canvas>
   
     <script>
 

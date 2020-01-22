@@ -165,7 +165,18 @@ function barChart(state){
             pieChart(barState,d.year)
           });
           
+        svgBar.on("mouseover",function(){
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .attr("fill","green");
+        })
 
+          .on("mouseout",function(){
+            d3.select(this)
+              .transition()
+              .duration(200);
+          });
 
     // End of New code for bar - Vijay
 
@@ -278,7 +289,9 @@ function lineChart(state, industryId) {
           {
             data: numbersline,
             label: descripsline,
-          }
+            backgroundColor: "#ff80a6",
+            borderColor: "yellow",
+              }
         ]
       }
   });
@@ -338,6 +351,7 @@ function optionChanged(changeState, changeYear) {
     const newIndustry = d3.select("#selDataset3").node().value;
 
   pieChart(newState, newYear);
+  myDoughnutChart.clear();
   lineChart(newState, newIndustry);
   //d3.select("#barchart").remove("svg")
   //d3.select("#the_bar_SVG").remove();
