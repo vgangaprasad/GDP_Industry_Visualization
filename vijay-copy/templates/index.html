@@ -202,9 +202,11 @@
       
               const mapState = d3.select("h4").text();
               const newYear = d3.select("#selDataset2").node().value;
+              const newIndustry = d3.select("#selDataset3").node().value;
               d3.select("#selDataset").node().value = mapState;
               pieChart(mapState, newYear);
               barChart(mapState);
+              lineChart(mapState, newIndustry);
         });
       }
         this.uStates=uStates;

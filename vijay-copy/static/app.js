@@ -293,6 +293,22 @@ function lineChart(state, industryId) {
             borderColor: "yellow",
               }
         ]
+      },
+      options : {
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Millions of Dollars $'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Years'
+            }
+          }],
+        }
       }
   });
 });
@@ -351,7 +367,7 @@ function optionChanged(changeState, changeYear) {
     const newIndustry = d3.select("#selDataset3").node().value;
 
   pieChart(newState, newYear);
-  myDoughnutChart.clear();
+  //myDoughnutChart.clear();
   lineChart(newState, newIndustry);
   //d3.select("#barchart").remove("svg")
   //d3.select("#the_bar_SVG").remove();
