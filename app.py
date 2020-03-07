@@ -15,7 +15,7 @@ from sqlalchemy import Column, Integer, String, Float
 # Flask Setup
 app = Flask(__name__)
 
-
+#SQLITE setup, SQLITE has the GDP data we gathered and cleaned.
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/GDPNew.db"
 db = SQLAlchemy(app)
 
@@ -50,8 +50,6 @@ def GDP():
     cursor = connection.cursor()
         
     cursor.execute("select * from GDP")
-    #print("In GDP")
-    #print(results)
 
     results = cursor.fetchall()
     
@@ -74,8 +72,6 @@ def GDPstate(state):
     cursor.execute(f"select * from GDP where GeoName == '{state}' and IndustryId == 1")
         
     results = cursor.fetchall()
-    #print("In state")
-    #print(results)
     
     return jsonify(results)
 
@@ -95,10 +91,6 @@ def GDPstateyear(state, year):
         
     cursor.execute(f"select {year}, IndustryId, Description from GDP where GeoName == '{state}' order by {year} desc")
     
-    #print("In state and Year")
-    
-    #print(results)
-        
     results = cursor.fetchall()
     
     return jsonify(results)
@@ -120,8 +112,6 @@ def GDPindustry(state, industryId):
     cursor.execute(f"select * from GDP where GeoName == '{state}' and IndustryId == '{industryId}'")
         
     results = cursor.fetchall()
-    #print("In state and Industry")
-    #print(results)
 
     return jsonify(results)
 
