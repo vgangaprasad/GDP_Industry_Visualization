@@ -1,5 +1,9 @@
 # Interactive Visulization of US GDP by Industry and State
 
+### Landing Page
+![Landing Page](images/01-Jumbotron.JPG)
+
+
 ## Description
 We wanted to data analytics skills like cleaning, transforming and loading the data and also Visualization skills to show case the findings in an interactive web application. Here are the things we did for this project.
 
@@ -37,11 +41,6 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 * https://github.com/congntran92
 
 ##Here are some of the images from the Application
-
-### Landing Page
-![Landing Page](images/01-Jumbotron.JPG)
-
-<br>
 
 ### US Map
 ![US Map](images/02-USMap.JPG)
