@@ -48,12 +48,17 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 <br>
 
 ### Bar Chart for the state selected from the Map or Drop Down
-![US Map](images/03-BarChart.JPG)
+![Bar Chart](images/03-BarChart.JPG)
 
 <br>
 
-### Donut Chart for the year selected from Bar Chart of Drop Down
-![US Map](images/04-DonutChart.JPG)
+### Donut Chart for the year selected from Bar Chart or Drop Down
+![Donut Chart](images/04-DonutChart.JPG)
+
+<br>
+
+### Line Chart for the Industry selected from Donut Chart or Drop Down
+![US Map](images/05-LineChart.JPG)
 
 
 
