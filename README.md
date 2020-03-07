@@ -10,7 +10,7 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 - Flask app to create our API to share the data in JSON Format
 
 ## Clone:
-* Clone this repo to your local machine using  https://github.com/deniscohen43/GDP_Industry_Visualization.git
+* Clone this repo to your local machine using  https://github.com/vgangaprasad/GDP_Industry_Visualization.git
 
 ## Built With:
 * Bootstrap
