@@ -1,4 +1,4 @@
-#Interactive Visulization of US GDP by Industry and State
+# Interactive Visulization of US GDP by Industry and State
 
 ## Description
 We wanted to data analytics skills like cleaning, transforming and loading the data and also Visualization skills to show case the findings in an interactive web application. Here are the things we did for this project.
