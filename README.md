@@ -41,7 +41,15 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 ### Landing Page
 ![Landing Page](images/01-Jumbotron.JPG)
 
+<br>
 
+### US Map
 ![US Map](images/02-USMap.JPG)
+
+<br>
+
+### Bar Chart for the state selected from the Map or Drop Down
+![US Map](images/03-BarChart.JPG)
+
 
 
