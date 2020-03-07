@@ -16,17 +16,16 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 ## Clone:
 * Clone this repo to your local machine using  https://github.com/vgangaprasad/GDP_Industry_Visualization.git
 
-## Built With:
+## Tools/Technologies Used:
 * Bootstrap
 * D3
 * Chart.js
 * Plotly
-
-## Dependencies:
 * SQLAlchemy
 * Pandas
 * Flask
 * BeautifulSoup
+* SQLITE
 
 ## File Breakdown:
 * Ins_Basic_Querying - Denis.ipynb: scrapes data from apps.bea.gov and converts data frames to json format
