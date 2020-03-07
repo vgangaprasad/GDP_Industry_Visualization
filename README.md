@@ -35,3 +35,8 @@ We wanted to data analytics skills like cleaning, transforming and loading the d
 * https://github.com/vgangaprasad
 * https://github.com/dmullen4
 * https://github.com/congntran92
+
+##Here are some of the images captured
+
+### Landing Page
+![Landing Page](images/01-Jumbotron.JPG)
